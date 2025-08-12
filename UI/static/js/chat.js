@@ -4,7 +4,8 @@
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
         if (!sessionId) {
-            sessionId = crypto.randomUUID();
+            //sessionId = crypto.randomUUID();
+            sessionId ="abcde";
             sessionStorage.setItem('session_id', sessionId);
         }
         function clearControls(){
