@@ -4,7 +4,7 @@
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
         const BASE_URL = "http://3.7.66.139:8000";
-       
+        
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
                 const r = Math.random() * 16 | 0;
