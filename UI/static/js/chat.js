@@ -3,11 +3,21 @@
         const txtsqlProgress = document.getElementById("txtsqlProgress");
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
+        const BASE_URL = "http://3.7.66.139:8000";
+       
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            }
+
         if (!sessionId) {
-            //sessionId = crypto.randomUUID();
-            sessionId ="abcde";
+            sessionId = generateUUID();
             sessionStorage.setItem('session_id', sessionId);
         }
+
         function clearControls(){
             document.getElementById("imageResponse").innerHTML = "";
             document.getElementById("ragResponse").innerHTML = "";
@@ -39,7 +49,7 @@
             formData.append("question", question);
             ragProgress.classList.remove("d-none");
 
-            const response = await fetch("http://127.0.0.1:8000/rag-pdf", {
+            const response = await fetch(`${BASE_URL}/rag-pdf`, {
                 method: "POST",
                 body: formData
             });
@@ -62,7 +72,7 @@
             formData.append("question", question);
             imageProgress.classList.remove("d-none");
 
-            const response = await fetch("http://127.0.0.1:8000/extract-image", {
+            const response = await fetch(`${BASE_URL}/extract-image`, {
                 method: "POST",
                 body: formData
             });
@@ -83,7 +93,7 @@
             formData.append("session_id", sessionId);
             txtsqlProgress.classList.remove("d-none");
 
-            const response = await fetch("http://127.0.0.1:8000/text-sql", {
+            const response = await fetch(`${BASE_URL}/text-sql`, {
                 method: "POST",
                 body: formData
             });
@@ -103,7 +113,7 @@
             formData.append("question", question);
             reportProgress.classList.remove("d-none");
           
-            const response = await fetch("http://127.0.0.1:8000/report", {
+            const response = await fetch(`${BASE_URL}/report`, {
                 method: "POST",
                 body: formData
             });
