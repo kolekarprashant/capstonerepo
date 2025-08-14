@@ -109,5 +109,4 @@ def get_llm():
     azure_endpoint=AZURE_ENDPOINT,
     openai_api_type="azure"
     )
-    
     return llm
