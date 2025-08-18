@@ -1,7 +1,7 @@
 
     <html>
     <head>
-        <title>Sales Report - 2025-08-13</title>
+        <title>Sales Report - 2025-08-14</title>
         <style>
             body { font-family: Arial, sans-serif; margin: 20px; }
             table { border-collapse: collapse; width: 100%; margin-top: 20px; }
@@ -14,10 +14,11 @@
     <body>
         <h1>Report Summary</h1>
         <h2>Overview</h2>
-        <p>This report presents the total sales revenue for the top 5 products, ranked by sales amount. Sales are calculated by summing (UnitPrice * Quantity * (1 - Discount)) for each product. The data was retrieved using the following SQL query:</p>
+        <p>This report presents the total sales of the top 5 products by revenue. It calculates total sales as SUM(UnitPrice * Quantity * (1 - Discount)). The following SQL query was executed to retrieve the product names and their total sales:</p>
 
         <h2>SQL Query</h2>
-        <pre>SELECT p.ProductName AS Product, ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS TotalSales
+        <pre>SELECT p.ProductName,
+       ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS TotalSales
 FROM "Order Details" od
 JOIN Products p ON od.ProductID = p.ProductID
 GROUP BY p.ProductName
@@ -27,7 +28,7 @@ LIMIT 5;</pre>
         <h2>Data Table</h2>
         <table>
             <thead>
-                <tr><th>Product</th><th>TotalSales</th></tr>
+                <tr><th>ProductName</th><th>TotalSales</th></tr>
             </thead>
             <tbody>
                 <tr><td>Côte de Blaye</td><td>141396.74</td></tr><tr><td>Thüringer Rostbratwurst</td><td>80368.67</td></tr><tr><td>Raclette Courdavault</td><td>71155.7</td></tr><tr><td>Tarte au sucre</td><td>47234.97</td></tr><tr><td>Camembert Pierrot</td><td>46825.48</td></tr>
@@ -35,7 +36,7 @@ LIMIT 5;</pre>
         </table>
 
         <h2>Chart</h2>
-        <img src="https://capstonereport.s3.us-east-1.amazonaws.com/reports/output_chart_20250813_130038.png" alt="Sales Chart" />
+        <img src="https://capstonereport.s3.us-east-1.amazonaws.com/reports/output_chart_20250814_142651.png" alt="Sales Chart" />
     </body>
     </html>
     
