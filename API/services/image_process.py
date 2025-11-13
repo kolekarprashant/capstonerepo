@@ -1,7 +1,8 @@
 import os
 from dotenv import load_dotenv
 import boto3
-from langchain_openai import AzureChatOpenAI
+from langchain_cohere import ChatCohere
+#from langchain_openai import AzureChatOpenAI
 from langchain.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from cohere_embedding import CohereEmbedding
@@ -16,6 +17,8 @@ load_dotenv()
 app = FastAPI()
 
 VECTOR_CACHE = {}
+
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
 def extract_text_from_image_aws_textract(file_path):
     logger.info(f"Extracting text from image using AWS Textract: {file_path}")
@@ -91,18 +94,25 @@ def get_memory():
     
     return memory
 
-def get_llm():
-    AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
-    AZURE_API_KEY = os.getenv("AZURE_API_KEY")
-    AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
+# def get_llm():
+#     AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
+#     AZURE_API_KEY = os.getenv("AZURE_API_KEY")
+#     AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
 
-    llm = AzureChatOpenAI(
-    azure_deployment=AZURE_DEPLOYMENT_NAME,
-    api_key=AZURE_API_KEY,
-    api_version="2024-12-01-preview",
-    azure_endpoint=AZURE_ENDPOINT,
-    openai_api_type="azure"
-    )
+#     llm = AzureChatOpenAI(
+#     azure_deployment=AZURE_DEPLOYMENT_NAME,
+#     api_key=AZURE_API_KEY,
+#     api_version="2024-12-01-preview",
+#     azure_endpoint=AZURE_ENDPOINT,
+#     openai_api_type="azure"
+#     )
     
-    return llm
+#     return llm
+
+def get_llm():
+    return ChatCohere(
+        cohere_api_key=COHERE_API_KEY,
+        model="command-r-plus", 
+        temperature=0.0         
+    )
     

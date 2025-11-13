@@ -1,0 +1,36 @@
+
+    <html>
+    <head>
+        <title>Sales Report - 2025-09-13</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            img { max-width: 100%; height: auto; margin-top: 20px; }
+            h1, h2 { color: #333; }
+        </style>
+    </head>
+    <body>
+        <h1>Report Summary</h1>
+        <h2>Overview</h2>
+        <p>Total customers region-wise as a bar graph.</p>
+
+        <h2>SQL Query</h2>
+        <pre>SELECT Region, COUNT(*) AS TotalCustomers FROM Customers GROUP BY Region</pre>
+
+        <h2>Data Table</h2>
+        <table>
+            <thead>
+                <tr><th>Region</th><th>TotalCustomers</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Region</td><td>62</td></tr><tr><td>AK</td><td>1</td></tr><tr><td>BC</td><td>2</td></tr><tr><td>CA</td><td>1</td></tr><tr><td>Co. Cork</td><td>1</td></tr><tr><td>DF</td><td>1</td></tr><tr><td>ID</td><td>1</td></tr><tr><td>Isle of Wight</td><td>1</td></tr><tr><td>Lara</td><td>1</td></tr><tr><td>MT</td><td>1</td></tr><tr><td>NM</td><td>1</td></tr><tr><td>Nueva Esparta</td><td>1</td></tr><tr><td>OR</td><td>4</td></tr><tr><td>Québec</td><td>1</td></tr><tr><td>RJ</td><td>3</td></tr><tr><td>SP</td><td>6</td></tr><tr><td>Táchira</td><td>1</td></tr><tr><td>WA</td><td>3</td></tr><tr><td>WY</td><td>1</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Chart</h2>
+        <img src="https://capstonereport.s3.us-east-1.amazonaws.com/reports/output_chart_20250913_145844.png" alt="Sales Chart" />
+    </body>
+    </html>
+    

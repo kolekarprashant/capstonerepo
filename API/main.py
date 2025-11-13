@@ -12,12 +12,17 @@ app = FastAPI()
 # for CORS issue
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 memory_store = {}
+
+@app.get("/")
+def home():
+    return {"message": "FastAPI server is running successfully!"}
+
 @app.post("/extract-image")
 async def rag_image(file: UploadFile = File(...),question: str = Form(...)):
     """

@@ -3,7 +3,7 @@
         const txtsqlProgress = document.getElementById("txtsqlProgress");
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
-        const BASE_URL = "http://13.233.0.199:8000";
+        const BASE_URL = "http://localhost:8000";
         
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -112,17 +112,14 @@
             const formData = new FormData();
             formData.append("question", question);
             reportProgress.classList.remove("d-none");
-          
+            console.log(formData);
             const response = await fetch(`${BASE_URL}/report`, {
                 method: "POST",
                 body: formData
             });
-            const resultdata = await response.json();
             reportProgress.classList.add("d-none");
-            const htmlUrl = resultdata.chat_history.find(
-                            item => typeof item.content === "string" && item.content.includes(".html")
-                            && item.name == "ReportGenerator")?.content;
-                            let answerHtml = "";
+            const htmlUrl = await response.json();
+
                             if (htmlUrl) {
                                 const filename = htmlUrl.split('/').pop() || "report.html";
                                 answerHtml = `<button id="downloadReportBtn" class="download-btn">Download HTML Report</button>`;
@@ -148,6 +145,17 @@
             <div class='message question'>Question: ${question}</div>
             <div class='message answer'>Answer: ${answerHtml}</div>
             ` + document.getElementById("reportResponse").innerHTML;
+
+
+
+            
+            // reportProgress.classList.add("d-none");
+            // const htmlUrl = resultdata.chat_history.find(
+            //                 item => typeof item.content === "string" && item.content.includes(".html")
+            //                 && item.name == "ReportGenerator")?.content;
+            //                 let answerHtml = "";
+            
+
 
         });
 

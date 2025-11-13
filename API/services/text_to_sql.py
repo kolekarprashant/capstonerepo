@@ -1,4 +1,5 @@
-from langchain_openai import AzureChatOpenAI
+#from langchain_openai import AzureChatOpenAI
+from langchain_cohere import ChatCohere
 from langchain.agents import AgentExecutor,create_tool_calling_agent
 import os
 from dotenv import load_dotenv
@@ -18,10 +19,10 @@ from logging_config import logger
 load_dotenv()
 memory_store = {}
 
-AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
-AZURE_API_KEY = os.getenv("AZURE_API_KEY")
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
-
+# AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
+# AZURE_API_KEY = os.getenv("AZURE_API_KEY")
+# AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 def get_sql_database():
     url = "https://raw.githubusercontent.com/jpwhite3/northwind-SQLite3/main/src/create.sql"
     connection = sqlite3.connect(":memory:", check_same_thread=False)
@@ -30,13 +31,19 @@ def get_sql_database():
                            connect_args={"check_same_thread": False})
     return SQLDatabase(engine)
 
+# def get_llm():
+#     return AzureChatOpenAI(
+#     azure_deployment=AZURE_DEPLOYMENT_NAME,
+#     api_key=AZURE_API_KEY,
+#     api_version="2024-12-01-preview",
+#     azure_endpoint=AZURE_ENDPOINT,
+#     openai_api_type="azure"
+#     )
 def get_llm():
-    return AzureChatOpenAI(
-    azure_deployment=AZURE_DEPLOYMENT_NAME,
-    api_key=AZURE_API_KEY,
-    api_version="2024-12-01-preview",
-    azure_endpoint=AZURE_ENDPOINT,
-    openai_api_type="azure"
+    return ChatCohere(
+        cohere_api_key=COHERE_API_KEY,
+        model="command-r-plus", 
+        temperature=0.0         
     )
 
 

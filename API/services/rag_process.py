@@ -2,7 +2,8 @@ import os
 from dotenv import load_dotenv
 import boto3
 import json
-from langchain_openai import AzureChatOpenAI
+from langchain_cohere import ChatCohere
+#from langchain_openai import AzureChatOpenAI
 from langchain_cohere import CohereEmbeddings
 from langchain.schema.document import Document
 import faiss
@@ -16,10 +17,10 @@ load_dotenv()
 
 s3 = boto3.client("s3", region_name=os.getenv("AWS_REGION"))
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
-AZURE_API_KEY = os.getenv("AZURE_API_KEY")
-AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
-
+# AZURE_DEPLOYMENT_NAME = os.getenv("AZURE_DEPLOYMENT_NAME")
+# AZURE_API_KEY = os.getenv("AZURE_API_KEY")
+# AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 def load_vectors_from_s3():
     bucket = os.getenv("S3_VECTOR_BUCKET_NAME")
     key = os.getenv("S3_VECTOR_FOLDER") + "customer_sales_vectors.json"
@@ -101,12 +102,19 @@ def run_rag_query(question:str):
         logger.exception(f"Error during RAG query execution: {e}")
         raise
 
+# def get_llm():
+#     llm = AzureChatOpenAI(
+#     azure_deployment=AZURE_DEPLOYMENT_NAME,
+#     api_key=AZURE_API_KEY,
+#     api_version="2024-12-01-preview",
+#     azure_endpoint=AZURE_ENDPOINT,
+#     openai_api_type="azure"
+#     )
+#     return llm
+
 def get_llm():
-    llm = AzureChatOpenAI(
-    azure_deployment=AZURE_DEPLOYMENT_NAME,
-    api_key=AZURE_API_KEY,
-    api_version="2024-12-01-preview",
-    azure_endpoint=AZURE_ENDPOINT,
-    openai_api_type="azure"
+    return ChatCohere(
+        cohere_api_key=COHERE_API_KEY,
+        model="command-r-plus", 
+        temperature=0.0         
     )
-    return llm
