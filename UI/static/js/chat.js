@@ -3,11 +3,7 @@
         const txtsqlProgress = document.getElementById("txtsqlProgress");
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
-<<<<<<< HEAD
-        const BASE_URL = "http://localhost:8000";
-=======
-        const BASE_URL = "http://13.233.0.199:8000";
->>>>>>> 65932edb961d8aa6a592e3526baba37a647a71de
+        const BASE_URL = "http://13.126.20.48:8000";
         
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
