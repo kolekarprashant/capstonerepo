@@ -1,10 +1,9 @@
-      const ragProgress = document.getElementById("ragProgress");
+        const ragProgress = document.getElementById("ragProgress");
         const imageProgress = document.getElementById("imageProgress");
         const txtsqlProgress = document.getElementById("txtsqlProgress");
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
-
-        const BASE_URL = "http://13.126.20.48:8000";
+        const BASE_URL = "http://3.110.196.241:8000";
         
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -147,14 +146,6 @@
             <div class='message answer'>Answer: ${answerHtml}</div>
             ` + document.getElementById("reportResponse").innerHTML;
 
-
-
-            
-            // reportProgress.classList.add("d-none");
-            // const htmlUrl = resultdata.chat_history.find(
-            //                 item => typeof item.content === "string" && item.content.includes(".html")
-            //                 && item.name == "ReportGenerator")?.content;
-            //                 let answerHtml = "";
             
 
 
