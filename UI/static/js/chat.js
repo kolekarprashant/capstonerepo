@@ -146,8 +146,5 @@
             <div class='message answer'>Answer: ${answerHtml}</div>
             ` + document.getElementById("reportResponse").innerHTML;
 
-            
-
-
         });
 
