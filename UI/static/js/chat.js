@@ -1,9 +1,10 @@
-        const ragProgress = document.getElementById("ragProgress");
+      const ragProgress = document.getElementById("ragProgress");
         const imageProgress = document.getElementById("imageProgress");
         const txtsqlProgress = document.getElementById("txtsqlProgress");
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
-        const BASE_URL = "http://13.203.75.207/:8000";
+
+        const BASE_URL = "http://13.126.20.48:8000";
         
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
