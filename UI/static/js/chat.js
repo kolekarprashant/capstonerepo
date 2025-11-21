@@ -4,6 +4,7 @@
         const reportProgress = document.getElementById("reportProgress");
         let sessionId = sessionStorage.getItem('session_id');
         
+        
         const BASE_URL = "http://3.109.121.222:8000";
         
         function generateUUID() {
